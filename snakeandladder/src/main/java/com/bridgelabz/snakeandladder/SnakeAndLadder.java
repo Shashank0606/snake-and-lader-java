@@ -1,49 +1,46 @@
 package com.bridgelabz.snakeandladder;
 
-import java.util.Random;
-
 public class SnakeAndLadder {
-    public static void main(String[] args) {
+	final static int source =0;
+	final static int destination =100;
 
-        int position = 0;
-        final int WINNINGPOSITION = 100;
-        while (position <= WINNINGPOSITION) {
-            Random rand = new Random();
-            int diceValue = rand.nextInt(6) + 1;
-            System.out.println("Dice Value is  " + diceValue);
-            int option = rand.nextInt(3);
-            if (position == WINNINGPOSITION) {
-                System.out.println("You won the game");
-
-                break;
+	public static void main(String[] args) {
+		System.out.println("Welcome to Snake and Ladder Game");
+		int position =0;
+		int diceRoll =0;
+		while (position != destination)
+		{
+			diceRoll++;
+			int randomCheck = (int) Math.floor(Math.random ()* 10) % 6+1;
+			int randomCheck2 = (int) (Math.random()* 10 )% 3;
+			switch (randomCheck2) {
+				case 0:
+					System.out.println("No Play");
+					position +=0;
+					break;
+				case 1:
+					System.out.println("Ladder");
+					position +=randomCheck;
+					break;
+				case 2:
+					System.out.println("Snake");
+					position -=randomCheck;
+					break;
+		}
+			if (position == 100) {
+				break;   
+			} else if (position > 100) {
+                position -= randomCheck;
+                System.out.println("Invalid Dice Face. You are staying on same position.");
+            } else if (position < 0) {
+                position = source;
+                System.out.println("You came back to start.");
+            } else {
+                System.out.println("New Position: " + position);
             }
-            switch (option) {
-                case 0:
-                    System.out.println("No Play");
-                    break;
-                case 1:
-                    System.out.println("Ladder");
-                    position += diceValue;
-                    System.out.println("Current Position is " + position);
-
-                    if (position > 100) {
-                        position = position - diceValue;
-                        System.out.println("Current Position is " + position);
-                    }
-                    break;
-                case 2:
-                    System.out.println("Snake");
-                    position -= diceValue;
-                    System.out.println("Current Position is " + position);
-
-                    if (position < 0) {
-                        position = 0;
-                        System.out.println("Current Position is " + position);
-                    }
-                    break;
-                default:
-                    System.out.println("Not Correct");
-            }
-        }
-    }
-}
+			
+			}
+		System.out.println("You won the game.");
+		System.out.println("Number of times diceroll is:" +diceRoll); 
+	}}
+	
